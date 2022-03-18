@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
@@ -22,12 +23,15 @@ import javafx.scene.control.RadioButton;
 public class FXMLDocumentController implements Initializable {
     GraphicsContext g;
     @FXML
+    ColorPicker colorRelleno,colorBorde;
+    
+    @FXML
     RadioButton RadioButton;
     
     @FXML
     private Canvas lienzo;
     @FXML
-    private Label label;
+    private Label label,labelRelleno,labelBorde;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -37,7 +41,8 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       g = lienzo.getGraphicsContext2D();
+       
     }    
     
 }

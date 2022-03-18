@@ -9,8 +9,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXMLDocumentController">
     <children>
-        <Button fx:id="button" layoutX="34.0" layoutY="23.0" onAction="#handleButtonAction" text="Click Me!" />
+        <Button fx:id="button" layoutX="17.0" layoutY="257.0" onAction="#handleButtonAction" text="Click Me!" />
       <Canvas fx:id="lienzo" height="514.0" layoutX="172.0" width="490.0" />
-      <RadioButton fx:id="RadioButton" layoutX="23.0" layoutY="90.0" mnemonicParsing="false" text="RadioButton" />
+      <RadioButton fx:id="RadioButton" layoutX="14.0" layoutY="385.0" mnemonicParsing="false" text="RadioButton" />
+      <ColorPicker fx:id="colorRelleno" layoutX="17.0" layoutY="42.0" />
+      <ColorPicker fx:id="colorBorde" layoutX="17.0" layoutY="102.0" />
+      <Label fx:id="labelRelleno" layoutX="17.0" layoutY="14.0" text="Relleno" />
+      <Label fx:id="labelBorde" layoutX="17.0" layoutY="85.0" text="Borde" />
     </children>
 </AnchorPane>

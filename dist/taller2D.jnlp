@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="taller2D.jnlp">
+  <information>
+    <title>taller2D</title>
+    <vendor>andre</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="lib\jaxen-1.2.0.jar" size="232455" download="eager" />
+    <jar href="lib\jdom-2.0.6.1-contrib.jar" size="166715" download="eager" />
+    <jar href="lib\jdom-2.0.6.1-junit.jar" size="508271" download="eager" />
+    <jar href="lib\jdom-2.0.6.1.jar" size="327785" download="eager" />
+    <jar href="lib\xercesImpl.jar" size="1367760" download="eager" />
+    <jar href="lib\xml-apis.jar" size="220536" download="eager" />
+    <jar href="taller2D.jar" size="3469" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="taller2D" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="vista.Taller2D"  name="taller2D" />
+  <update check="always"/>
+</jnlp>

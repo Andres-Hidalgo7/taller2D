@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 
 /**
@@ -17,7 +19,9 @@ import javafx.scene.control.Label;
  * @author andre
  */
 public class FXMLDocumentController implements Initializable {
-//    comentario
+    GraphicsContext g;
+    @FXML
+    private Canvas lienzo;
     @FXML
     private Label label;
     

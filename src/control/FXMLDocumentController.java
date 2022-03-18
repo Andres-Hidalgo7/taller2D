@@ -13,13 +13,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 
 /**
  *
- * @author andre
+ * @author andres
  */
 public class FXMLDocumentController implements Initializable {
     GraphicsContext g;
+    @FXML
+    RadioButton RadioButton;
+    
     @FXML
     private Canvas lienzo;
     @FXML

@@ -7,9 +7,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="661.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="control.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXMLDocumentController">
     <children>
         <Button fx:id="button" layoutX="34.0" layoutY="23.0" onAction="#handleButtonAction" text="Click Me!" />
       <Canvas fx:id="lienzo" height="514.0" layoutX="172.0" width="490.0" />
+      <RadioButton fx:id="RadioButton" layoutX="23.0" layoutY="90.0" mnemonicParsing="false" text="RadioButton" />
     </children>
 </AnchorPane>

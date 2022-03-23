@@ -7,14 +7,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="639.0" prefWidth="881.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXMLDocumentController">
     <children>
-        <Button fx:id="button" layoutX="17.0" layoutY="257.0" onAction="#handleButtonAction" text="Click Me!" />
-      <Canvas fx:id="lienzo" height="514.0" layoutX="172.0" width="490.0" />
-      <RadioButton fx:id="RadioButton" layoutX="14.0" layoutY="385.0" mnemonicParsing="false" text="RadioButton" />
-      <ColorPicker fx:id="colorRelleno" layoutX="17.0" layoutY="42.0" />
-      <ColorPicker fx:id="colorBorde" layoutX="17.0" layoutY="102.0" />
-      <Label fx:id="labelRelleno" layoutX="17.0" layoutY="14.0" text="Relleno" />
-      <Label fx:id="labelBorde" layoutX="17.0" layoutY="85.0" text="Borde" />
+        <Button fx:id="hexagono" layoutX="17.0" layoutY="161.0" onAction="#hexagono" prefHeight="25.0" prefWidth="76.0" text="Hexagono" />
+      <Canvas fx:id="lienzo" height="605.0" layoutX="216.0" width="665.0" />
+      <RadioButton fx:id="RadioButton" layoutX="12.0" layoutY="466.0" mnemonicParsing="false" text="RadioButton" />
+      <ColorPicker fx:id="colorRelleno" layoutX="17.0" layoutY="62.0" />
+      <ColorPicker fx:id="colorBorde" layoutX="17.0" layoutY="120.0" />
+      <Label fx:id="labelRelleno" layoutX="17.0" layoutY="34.0" text="Relleno" />
+      <Label fx:id="labelBorde" layoutX="21.0" layoutY="97.0" text="Borde" />
+      <Button fx:id="heptagono" layoutX="17.0" layoutY="194.0" onAction="#heptagono" text="Heptagono" />
+      <Button fx:id="octagono" layoutX="17.0" layoutY="226.0" onAction="#octagono" prefHeight="25.0" prefWidth="76.0" text="Octagono" />
+      <Button fx:id="decagono" layoutX="17.0" layoutY="259.0" onAction="#decagono" prefHeight="25.0" prefWidth="76.0" text="Decagono" />
+      <Button fx:id="estrella5" layoutX="17.0" layoutY="303.0" onAction="#estrella5" prefHeight="25.0" prefWidth="116.0" text="Estrella 5 puntas" />
+      <Button fx:id="estrella6" layoutX="17.0" layoutY="334.0" onAction="#estrella6" prefHeight="25.0" prefWidth="116.0" text="Estrella 6 puntas" />
+      <Button fx:id="curva" layoutX="17.0" layoutY="386.0" onAction="#curva" prefHeight="25.0" prefWidth="116.0" text="Curva" />
+      <Button fx:id="pacman" layoutX="17.0" layoutY="420.0" onAction="#pacman" prefHeight="25.0" prefWidth="116.0" text="pacman" />
     </children>
 </AnchorPane>

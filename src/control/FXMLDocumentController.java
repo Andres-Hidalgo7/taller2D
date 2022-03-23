@@ -15,34 +15,87 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import modelo.Punto2D;
 
 /**
  *
  * @author andres
  */
 public class FXMLDocumentController implements Initializable {
+
+    double coordenadaX;
+    double coordenadaY;
     GraphicsContext g;
     @FXML
-    ColorPicker colorRelleno,colorBorde;
-    
+    ColorPicker colorRelleno, colorBorde;
+
     @FXML
     RadioButton RadioButton;
-    
+
     @FXML
     private Canvas lienzo;
     @FXML
-    private Label label,labelRelleno,labelBorde;
-    
+    private Label label, labelRelleno, labelBorde;
+
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private void obtenerCoordenadas(MouseEvent event) {
+        coordenadaX = event.getX();
+        coordenadaY = event.getY();
+//
+        Punto2D objp = new Punto2D(coordenadaX, coordenadaY);
+
+        System.out.println("Punto " + objp.toString());
+    }
+
+    @FXML
+    private void hexagono(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void heptagono(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void octagono(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void decagono(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void curva(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void pacman(ActionEvent event) {
+
     }
     
+    @FXML
+    private void estrella5(ActionEvent event) {
+
+    }
+    @FXML
+    private void estrella6(ActionEvent event) {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       g = lienzo.getGraphicsContext2D();
-       
-    }    
-    
+        g = lienzo.getGraphicsContext2D();
+        double w = lienzo.getWidth();
+        double h = lienzo.getHeight();
+        g.setStroke(Color.BLACK);
+        g.setLineWidth(0.5);
+        g.strokeRect(0, 0, w, h);
+    }
+
 }

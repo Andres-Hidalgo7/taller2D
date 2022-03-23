@@ -6,6 +6,7 @@
 package control;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,9 +25,13 @@ import modelo.Punto2D;
  * @author andres
  */
 public class FXMLDocumentController implements Initializable {
-
-    double coordenadaX;
-    double coordenadaY;
+    double coordenadaX,coordenadaY;
+    double cX;
+    double cY;
+    double o;
+    double a;
+    double[] xx;
+    double[] yy;
     GraphicsContext g;
     @FXML
     ColorPicker colorRelleno, colorBorde;
@@ -37,7 +42,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Canvas lienzo;
     @FXML
-    private Label label, labelRelleno, labelBorde;
+    private RadioButton relleno, borde;
 
     @FXML
     private void obtenerCoordenadas(MouseEvent event) {
@@ -48,25 +53,67 @@ public class FXMLDocumentController implements Initializable {
 
         System.out.println("Punto " + objp.toString());
     }
+    public void ngon(double x,double y,double r,int n){
+        if(borde.isSelected()){
+            g.setStroke(colorBorde.getValue());
+        }
+        
+                
+        xx = new double[n];
+        yy = new double[n];
+        
+        a = 2 * Math.PI/n;
+        
+        o = 0;//inicializar el angulo 
+        
+        
+        for (int i = 0; i < n; i++) {
+            
+            cX = Math.cos(o);
+            cY = Math.sin(o);
+            
+            xx[i] = x + cX*r;
+            yy[i] = y + cY*r;
+            
+            o += a;
+                
+        }
+        g.strokePolygon(xx, yy, n);
+        
+    }
+    @FXML
+    private void activarBoton(ActionEvent event) {
+        if(relleno.isSelected()){
+            colorRelleno.setDisable(false);
+        }else{
+            colorRelleno.setDisable(true);
+        }
+        
+        if(borde.isSelected()){
+          colorBorde.setDisable(false);
+        }else{
+            colorBorde.setDisable(true);
+        }
+    }
 
     @FXML
     private void hexagono(ActionEvent event) {
-
+        ngon(coordenadaX,coordenadaY,65,6);
     }
 
     @FXML
     private void heptagono(ActionEvent event) {
-
+        ngon(coordenadaX,coordenadaY,65,7);
     }
 
     @FXML
     private void octagono(ActionEvent event) {
-
+        ngon(coordenadaX,coordenadaY,65,8);
     }
 
     @FXML
     private void decagono(ActionEvent event) {
-
+        ngon(coordenadaX,coordenadaY,65,10);
     }
 
     @FXML
@@ -96,6 +143,9 @@ public class FXMLDocumentController implements Initializable {
         g.setStroke(Color.BLACK);
         g.setLineWidth(0.5);
         g.strokeRect(0, 0, w, h);
+        
+        colorRelleno.setDisable(true);
+        
     }
 
 }

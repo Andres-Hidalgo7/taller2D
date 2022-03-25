@@ -14,7 +14,7 @@
     <jar href="lib\jdom-2.0.6.1.jar" size="327785" download="eager" />
     <jar href="lib\xercesImpl.jar" size="1367760" download="eager" />
     <jar href="lib\xml-apis.jar" size="220536" download="eager" />
-    <jar href="taller2D.jar" size="3469" download="eager" />
+    <jar href="taller2D.jar" size="5391" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="taller2D" >
     <param name="requiredFXVersion" value="8.0+"/>

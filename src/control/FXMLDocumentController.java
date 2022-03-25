@@ -16,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import modelo.Punto2D;
@@ -38,6 +39,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     RadioButton RadioButton;
+    
+    @FXML
+    Slider sliderBorde,sliderRadio;
 
     @FXML
     private Canvas lienzo;
@@ -56,6 +60,7 @@ public class FXMLDocumentController implements Initializable {
     public void ngon(double x,double y,double r,int n){
         if(borde.isSelected()){
             g.setStroke(colorBorde.getValue());
+            g.setLineWidth(sliderBorde.getValue());
         }
         
                 
@@ -78,7 +83,15 @@ public class FXMLDocumentController implements Initializable {
             o += a;
                 
         }
-        g.strokePolygon(xx, yy, n);
+        if(!relleno.isSelected() && borde.isSelected()){
+            g.strokePolygon(xx, yy, n);
+        }else if(relleno.isSelected() && !borde.isSelected()){
+            g.fillPolygon(xx, yy, n);
+        }else{
+            g.strokePolygon(xx, yy, n);
+            g.fillPolygon(xx, yy, n);
+        }
+        
         
     }
     @FXML
@@ -86,6 +99,7 @@ public class FXMLDocumentController implements Initializable {
         if(relleno.isSelected()){
             colorRelleno.setDisable(false);
         }else{
+            g.setFill(colorRelleno.getValue());
             colorRelleno.setDisable(true);
         }
         

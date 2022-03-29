@@ -34,11 +34,12 @@ public class FXMLDocumentController implements Initializable {
     double[] xx;
     double[] yy;
     GraphicsContext g;
+    
     @FXML
     ColorPicker colorRelleno, colorBorde;
-
+    
     @FXML
-    RadioButton RadioButton;
+    Label lRadio;
     
     @FXML
     Slider sliderBorde,sliderRadio;
@@ -62,7 +63,7 @@ public class FXMLDocumentController implements Initializable {
             g.setStroke(colorBorde.getValue());
             g.setLineWidth(sliderBorde.getValue());
         }
-        
+            
                 
         xx = new double[n];
         yy = new double[n];
@@ -86,8 +87,10 @@ public class FXMLDocumentController implements Initializable {
         if(!relleno.isSelected() && borde.isSelected()){
             g.strokePolygon(xx, yy, n);
         }else if(relleno.isSelected() && !borde.isSelected()){
+            g.setFill(colorRelleno.getValue());
             g.fillPolygon(xx, yy, n);
         }else{
+            g.setFill(colorRelleno.getValue());
             g.strokePolygon(xx, yy, n);
             g.fillPolygon(xx, yy, n);
         }
@@ -105,34 +108,36 @@ public class FXMLDocumentController implements Initializable {
         
         if(borde.isSelected()){
           colorBorde.setDisable(false);
+          sliderBorde.setDisable(false);
         }else{
             colorBorde.setDisable(true);
+            sliderBorde.setDisable(true);
         }
     }
 
     @FXML
     private void hexagono(ActionEvent event) {
-        ngon(coordenadaX,coordenadaY,65,6);
+        ngon(coordenadaX,coordenadaY,sliderRadio.getValue(),6);
     }
 
     @FXML
     private void heptagono(ActionEvent event) {
-        ngon(coordenadaX,coordenadaY,65,7);
+        ngon(coordenadaX,coordenadaY,sliderRadio.getValue(),7);
     }
 
     @FXML
     private void octagono(ActionEvent event) {
-        ngon(coordenadaX,coordenadaY,65,8);
+        ngon(coordenadaX,coordenadaY,sliderRadio.getValue(),8);
     }
 
     @FXML
     private void decagono(ActionEvent event) {
-        ngon(coordenadaX,coordenadaY,65,10);
+        ngon(coordenadaX,coordenadaY,sliderRadio.getValue(),10);
     }
 
     @FXML
     private void curva(ActionEvent event) {
-
+        g.bezierCurveTo(cX, cX, cX, cX, cX, cX);
     }
 
     @FXML

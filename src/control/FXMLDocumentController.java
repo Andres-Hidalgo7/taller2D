@@ -25,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -155,7 +156,7 @@ public class FXMLDocumentController implements Initializable {
 
             g.setFill(colorRelleno.getValue());
             g.fillPolygon(xx, yy, n);
-            
+
             red = colorRelleno.getValue().getRed();
             blue = colorRelleno.getValue().getBlue();
             green = colorRelleno.getValue().getGreen();
@@ -163,6 +164,15 @@ public class FXMLDocumentController implements Initializable {
 
             fillValue = new ColorValue(red, blue, green, opacity);
         }
+        losPuntos = new LinkedList<>();
+        for (int i = 0; i < xx.length; i++) {
+            losPuntos.add(new Punto2D(xx[i], yy[i]));
+        }
+        FiguraGeometrica figura = new FiguraGeometrica("Poligono No."
+                + contador, colorStroke, colorFill, losPuntos, strokeValue, fillValue, lineW);
+        lasFiguras.add(figura);
+        contador++;
+        System.out.println("Numero de figuras en la lista " + lasFiguras.size());
 
     }
 
@@ -207,11 +217,54 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void curva(ActionEvent event) {
         g.bezierCurveTo(cX, cX, cX, cX, cX, cX);
+
     }
 
     @FXML
     private void pacman(ActionEvent event) {
+        //aqui sabremos el tamaño que tendremos
+        x = new double[3];
+        y = new double[3];
 
+        //radio
+        double radio = 60;
+
+        //punto del centro
+        x[0] = coordenadaX;
+        y[0] = coordenadaY;
+
+        //cord 1 a la derecha
+        x[1] = coordenadaX + radio + radio / 2.2;
+        y[1] = coordenadaY;
+
+        //punto 2 de abajo                           
+        x[2] = coordenadaX + radio + radio / 12 * Math.sin(45 * Math.PI / 180);
+        y[2] = coordenadaY + radio + radio / 12 * Math.cos(45 * Math.PI / 180);
+        if (!relleno.isSelected() && borde.isSelected()) {
+            g.setStroke(colorBorde.getValue());
+            g.setLineWidth(sliderBorde.getValue());
+            g.strokeArc(x[0] - radio - radio / 2, y[0] - radio - radio / 2, radio * 3, radio * 3, 0, 315, ArcType.OPEN);
+            g.strokeLine(x[0], y[0], x[1], y[1]);
+            g.strokeLine(x[0], y[0], x[2], y[2]);
+            //g.strokeArc(x[0]-radio-radio/2, y[0]-radio-radio/2, radio*3, radio*3, 0, 315, ArcType.OPEN);
+        } else if (relleno.isSelected() && !borde.isSelected()) {
+            //rellenar arco y borde de arco, se deben hacer en ese orden 
+            g.setStroke(colorRelleno.getValue());
+            g.setFill(colorRelleno.getValue());
+            g.strokeLine(x[0], y[0], x[1], y[1]);
+            g.strokeLine(x[0], y[0], x[2], y[2]);
+            g.fillArc(x[0] - radio - radio / 2, y[0] - radio - radio / 2, radio * 3, radio * 3, 0, 315, ArcType.ROUND);
+            g.strokeArc(x[0] - radio - radio / 2, y[0] - radio - radio / 2, radio * 3, radio * 3, 0, 315, ArcType.OPEN);
+        } else {
+            g.setStroke(colorBorde.getValue());
+            g.setLineWidth(sliderBorde.getValue());
+            g.strokeLine(x[0], y[0], x[1], y[1]);
+            g.strokeLine(x[0], y[0], x[2], y[2]);
+            
+            g.setFill(colorRelleno.getValue());
+            g.fillArc(x[0] - radio - radio / 2, y[0] - radio - radio / 2, radio * 3, radio * 3, 0, 315, ArcType.ROUND);
+            g.strokeArc(x[0] - radio - radio / 2, y[0] - radio - radio / 2, radio * 3, radio * 3, 0, 315, ArcType.OPEN);
+        }
     }
 
     @FXML
@@ -315,7 +368,8 @@ public class FXMLDocumentController implements Initializable {
         for (int i = 0; i < x.length; i++) {
             losPuntos.add(new Punto2D(x[i], y[i]));
         }
-        FiguraGeometrica figura = new FiguraGeometrica("Estrella5P" + contador, colorStroke, colorFill, losPuntos, strokeValue, fillValue, lineW);
+        FiguraGeometrica figura = new FiguraGeometrica("Estrella5P No."
+                + contador, colorStroke, colorFill, losPuntos, strokeValue, fillValue, lineW);
         lasFiguras.add(figura);
         contador++;
         System.out.println("Numero de figuras en la lista " + lasFiguras.size());
@@ -323,7 +377,109 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void estrella6(ActionEvent event) {
+        double rad = sliderRadio.getValue();
 
+        x = new double[12];
+        y = new double[12];
+
+        x[0] = (coordenadaX + rad * Math.cos(11 * 2 * Math.PI / 12));
+        y[0] = (coordenadaY + rad * Math.sin(11 * 2 * Math.PI / 12));
+
+        x[1] = (coordenadaX + (rad / 2.5) * Math.cos(12 * 2 * Math.PI / 12));
+        y[1] = (coordenadaY + (rad / 2.5) * Math.sin(12 * 2 * Math.PI / 12));
+
+        x[2] = (coordenadaX + rad * Math.cos(2 * Math.PI / 12));
+        y[2] = (coordenadaY + rad * Math.sin(2 * Math.PI / 12));
+
+        x[3] = (coordenadaX + (rad / 2.5) * Math.cos(2 * 2 * Math.PI / 12));
+        y[3] = (coordenadaY + (rad / 2.5) * Math.sin(2 * 2 * Math.PI / 12));
+
+        x[4] = (coordenadaX + rad * Math.cos(3 * 2 * Math.PI / 12));
+        y[4] = (coordenadaY + rad * Math.sin(3 * 2 * Math.PI / 12));
+
+        x[5] = (coordenadaX + (rad / 2.5) * Math.cos(4 * 2 * Math.PI / 12));
+        y[5] = (coordenadaY + (rad / 2.5) * Math.sin(4 * 2 * Math.PI / 12));
+
+        x[6] = (coordenadaX + rad * Math.cos(5 * 2 * Math.PI / 12));
+        y[6] = (coordenadaY + rad * Math.sin(5 * 2 * Math.PI / 12));
+
+        x[7] = (coordenadaX + (rad / 2.5) * Math.cos(6 * 2 * Math.PI / 12));
+        y[7] = (coordenadaY + (rad / 2.5) * Math.sin(6 * 2 * Math.PI / 12));
+
+        x[8] = (coordenadaX + rad * Math.cos(7 * 2 * Math.PI / 12));
+        y[8] = (coordenadaY + rad * Math.sin(7 * 2 * Math.PI / 12));
+
+        x[9] = (coordenadaX + (rad / 2.5) * Math.cos(8 * 2 * Math.PI / 12));
+        y[9] = (coordenadaY + (rad / 2.5) * Math.sin(8 * 2 * Math.PI / 12));
+
+        x[10] = (coordenadaX + rad * Math.cos(9 * 2 * Math.PI / 12));
+        y[10] = (coordenadaY + rad * Math.sin(9 * 2 * Math.PI / 12));
+
+        x[11] = (coordenadaX + (rad / 2.5) * Math.cos(10 * 2 * Math.PI / 12));
+        y[11] = (coordenadaY + (rad / 2.5) * Math.sin(10 * 2 * Math.PI / 12));
+
+        lineW = sliderBorde.getValue();
+        if (!relleno.isSelected() && borde.isSelected()) {
+
+            g.setStroke(colorBorde.getValue());
+            g.setLineWidth(lineW);
+            g.strokePolygon(x, y, 12);
+
+            colorStroke = FiguraGeometrica.toHexString(colorBorde.getValue());
+            red = colorBorde.getValue().getRed();
+            blue = colorBorde.getValue().getBlue();
+            green = colorBorde.getValue().getGreen();
+            opacity = colorBorde.getValue().getOpacity();
+
+            strokeValue = new ColorValue(red, blue, green, opacity);
+
+        } else if (relleno.isSelected() && !borde.isSelected()) {
+
+            g.setFill(colorRelleno.getValue());
+            g.fillPolygon(x, y, 12);
+
+            red = colorRelleno.getValue().getRed();
+            blue = colorRelleno.getValue().getBlue();
+            green = colorRelleno.getValue().getGreen();
+            opacity = colorRelleno.getValue().getOpacity();
+
+            fillValue = new ColorValue(red, blue, green, opacity);
+
+        } else {
+
+            g.setStroke(colorBorde.getValue());
+            g.setLineWidth(sliderBorde.getValue());
+            g.strokePolygon(x, y, 12);
+
+            colorStroke = FiguraGeometrica.toHexString(colorBorde.getValue());
+            red = colorBorde.getValue().getRed();
+            blue = colorBorde.getValue().getBlue();
+            green = colorBorde.getValue().getGreen();
+            opacity = colorBorde.getValue().getOpacity();
+
+            strokeValue = new ColorValue(red, blue, green, opacity);
+
+            g.setFill(colorRelleno.getValue());
+            g.fillPolygon(x, y, 12);
+
+            red = colorRelleno.getValue().getRed();
+            blue = colorRelleno.getValue().getBlue();
+            green = colorRelleno.getValue().getGreen();
+            opacity = colorRelleno.getValue().getOpacity();
+
+            fillValue = new ColorValue(red, blue, green, opacity);
+
+            losPuntos = new LinkedList<>();
+            for (int i = 0; i < x.length; i++) {
+                losPuntos.add(new Punto2D(x[i], y[i]));
+            }
+
+        }
+        FiguraGeometrica figura = new FiguraGeometrica("Estrella6P No."
+                + contador, colorStroke, colorFill, losPuntos, strokeValue, fillValue, lineW);
+        lasFiguras.add(figura);
+        contador++;
+        System.out.println("Numero de figuras en la lista " + lasFiguras.size());
     }
 
     @FXML
@@ -351,9 +507,9 @@ public class FXMLDocumentController implements Initializable {
         boolean t = ManejoArchivo.crearArchivoXML(lasFiguras, f);
 
         if (t) {
-            JOptionPane.showMessageDialog(null, "Se creo el archivo");
+            JOptionPane.showMessageDialog(null, "Archivo creado y guardado");
         } else {
-            JOptionPane.showMessageDialog(null, "No Se creo el archivo");
+            JOptionPane.showMessageDialog(null, "No se creó el archivo");
         }
         System.out.println("t = " + t);
 

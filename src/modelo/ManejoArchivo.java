@@ -30,8 +30,8 @@ public class ManejoArchivo {
 
         try {
 
-            Element figurasgeometricas = new Element("figurasgeometricas");
-            Document doc = new Document(figurasgeometricas);
+            Element figurasGeometricas = new Element("figurasGeometricas");
+            Document doc = new Document(figurasGeometricas);
 
             for (int i = 0; i < lasFiguras.size(); i++) {
 
@@ -92,7 +92,7 @@ public class ManejoArchivo {
             Document doc= (Document) builder.build(xmlFile);;
             Element root = doc.getRootElement();
 
-            List list = root.getChildren("figura");
+            List list = root.getChildren("figuraGeometrica");
 
             for (int i = 0; i < list.size(); i++) {
 

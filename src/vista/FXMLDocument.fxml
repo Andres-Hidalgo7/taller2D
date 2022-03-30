@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="937.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="671.0" prefWidth="937.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FXMLDocumentController">
     <children>
         <Button fx:id="hexagono" layoutX="19.0" layoutY="303.0" onAction="#hexagono" prefHeight="25.0" prefWidth="76.0" text="Hexagono" />
       <Canvas fx:id="lienzo" height="605.0" layoutX="216.0" onMouseClicked="#obtenerCoordenadas" width="665.0" />
@@ -27,6 +27,8 @@
       <Label fx:id="lRadio" layoutX="29.0" layoutY="185.0" text="Radio" />
       <Label layoutX="25.0" layoutY="134.0" text="Grosor" />
       <Button layoutX="19.0" layoutY="580.0" mnemonicParsing="false" onAction="#limpiarLienzo" text="Limpiar Lienzo" />
-      <Button layoutX="3.0" layoutY="2.0" mnemonicParsing="false" onAction="#guardarIMG" text="Guardar IMG" />
+      <Button layoutX="3.0" layoutY="2.0" mnemonicParsing="false" onAction="#guardarIMG" prefHeight="25.0" prefWidth="105.0" text="Guardar IMG" />
+      <Button layoutX="107.0" layoutY="2.0" mnemonicParsing="false" onAction="#guardarArchivo" prefHeight="25.0" prefWidth="105.0" text="Guardar Archivo" />
+      <Button layoutX="107.0" layoutY="27.0" mnemonicParsing="false" onAction="#leerArchivo" prefHeight="25.0" prefWidth="105.0" text="Leer Archivo" />
     </children>
 </AnchorPane>

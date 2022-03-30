@@ -22,6 +22,9 @@ public class ColorValue {
         this.b = b;
         this.a = a;
     }
+    public ColorValue(){
+        
+    }
 
     /**
      * Get the value of a

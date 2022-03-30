@@ -8,6 +8,7 @@ package control;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
@@ -26,6 +27,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import modelo.ColorValue;
+import modelo.FiguraGeometrica;
+import modelo.ManejoArchivo;
 import modelo.Punto2D;
 
 /**
@@ -57,6 +62,26 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private RadioButton relleno, borde;
 
+    DecimalFormat df;
+    FileChooser fc;
+    LinkedList<FiguraGeometrica> lasFiguras;
+    LinkedList<Punto2D> losPuntos;
+    String colorStroke = "Sin borde";
+    String colorFill = "Sin relleno";
+    double red = 0;
+    double blue = 0;
+    double green = 0;
+    double opacity = 0;
+    double lineW = 0;
+
+    ColorValue fillValue;
+    ColorValue strokeValue;
+
+    int contador = 0;
+
+    double pX[];
+    double pY[];
+
     @FXML
     private void obtenerCoordenadas(MouseEvent event) {
         coordenadaX = event.getX();
@@ -68,10 +93,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void ngon(double x, double y, double r, int n) {
-        if (borde.isSelected()) {
-            g.setStroke(colorBorde.getValue());
-            g.setLineWidth(sliderBorde.getValue());
-        }
 
         xx = new double[n];
         yy = new double[n];
@@ -91,15 +112,56 @@ public class FXMLDocumentController implements Initializable {
             o += a;
 
         }
+        lineW = sliderBorde.getValue();
         if (!relleno.isSelected() && borde.isSelected()) {
+
+            g.setStroke(colorBorde.getValue());
+            g.setLineWidth(sliderBorde.getValue());
             g.strokePolygon(xx, yy, n);
+
+            colorStroke = FiguraGeometrica.toHexString(colorBorde.getValue());
+            red = colorBorde.getValue().getRed();
+            blue = colorBorde.getValue().getBlue();
+            green = colorBorde.getValue().getGreen();
+            opacity = colorBorde.getValue().getOpacity();
+
+            strokeValue = new ColorValue(red, blue, green, opacity);
+
         } else if (relleno.isSelected() && !borde.isSelected()) {
+
             g.setFill(colorRelleno.getValue());
             g.fillPolygon(xx, yy, n);
+
+            red = colorRelleno.getValue().getRed();
+            blue = colorRelleno.getValue().getBlue();
+            green = colorRelleno.getValue().getGreen();
+            opacity = colorRelleno.getValue().getOpacity();
+
+            fillValue = new ColorValue(red, blue, green, opacity);
+
         } else {
-            g.setFill(colorRelleno.getValue());
+
             g.strokePolygon(xx, yy, n);
+            g.setStroke(colorBorde.getValue());
+            g.setLineWidth(sliderBorde.getValue());
+
+            colorStroke = FiguraGeometrica.toHexString(colorBorde.getValue());
+            red = colorBorde.getValue().getRed();
+            blue = colorBorde.getValue().getBlue();
+            green = colorBorde.getValue().getGreen();
+            opacity = colorBorde.getValue().getOpacity();
+
+            strokeValue = new ColorValue(red, blue, green, opacity);
+
+            g.setFill(colorRelleno.getValue());
             g.fillPolygon(xx, yy, n);
+            
+            red = colorRelleno.getValue().getRed();
+            blue = colorRelleno.getValue().getBlue();
+            green = colorRelleno.getValue().getGreen();
+            opacity = colorRelleno.getValue().getOpacity();
+
+            fillValue = new ColorValue(red, blue, green, opacity);
         }
 
     }
@@ -197,20 +259,66 @@ public class FXMLDocumentController implements Initializable {
         //punto 10
         x[9] = x[0] + radiointerno * Math.cos(216 * Math.PI / 180);
         y[9] = y[0] - radiointerno * Math.sin(216 * Math.PI / 180);
-
+        lineW = sliderBorde.getValue();
         if (!relleno.isSelected() && borde.isSelected()) {
-            g.setLineWidth(sliderBorde.getValue());
+
+            g.setStroke(colorBorde.getValue());
+            g.setLineWidth(lineW);
             g.strokePolygon(x, y, 10);
+
+            colorStroke = FiguraGeometrica.toHexString(colorBorde.getValue());
+            red = colorBorde.getValue().getRed();
+            blue = colorBorde.getValue().getBlue();
+            green = colorBorde.getValue().getGreen();
+            opacity = colorBorde.getValue().getOpacity();
+
+            strokeValue = new ColorValue(red, blue, green, opacity);
+
         } else if (relleno.isSelected() && !borde.isSelected()) {
+
             g.setFill(colorRelleno.getValue());
             g.fillPolygon(x, y, 10);
+
+            red = colorRelleno.getValue().getRed();
+            blue = colorRelleno.getValue().getBlue();
+            green = colorRelleno.getValue().getGreen();
+            opacity = colorRelleno.getValue().getOpacity();
+
+            fillValue = new ColorValue(red, blue, green, opacity);
+
         } else {
+
             g.setStroke(colorBorde.getValue());
             g.setLineWidth(sliderBorde.getValue());
-            g.setFill(colorRelleno.getValue());
             g.strokePolygon(x, y, 10);
+
+            colorStroke = FiguraGeometrica.toHexString(colorBorde.getValue());
+            red = colorBorde.getValue().getRed();
+            blue = colorBorde.getValue().getBlue();
+            green = colorBorde.getValue().getGreen();
+            opacity = colorBorde.getValue().getOpacity();
+
+            strokeValue = new ColorValue(red, blue, green, opacity);
+
+            g.setFill(colorRelleno.getValue());
             g.fillPolygon(x, y, 10);
+
+            red = colorRelleno.getValue().getRed();
+            blue = colorRelleno.getValue().getBlue();
+            green = colorRelleno.getValue().getGreen();
+            opacity = colorRelleno.getValue().getOpacity();
+
+            fillValue = new ColorValue(red, blue, green, opacity);
+
         }
+        losPuntos = new LinkedList<>();
+        for (int i = 0; i < x.length; i++) {
+            losPuntos.add(new Punto2D(x[i], y[i]));
+        }
+        FiguraGeometrica figura = new FiguraGeometrica("Estrella5P" + contador, colorStroke, colorFill, losPuntos, strokeValue, fillValue, lineW);
+        lasFiguras.add(figura);
+        contador++;
+        System.out.println("Numero de figuras en la lista " + lasFiguras.size());
     }
 
     @FXML
@@ -228,6 +336,68 @@ public class FXMLDocumentController implements Initializable {
         g.setStroke(Color.BLACK);
         g.setLineWidth(0.5);
         g.strokeRect(0, 0, w, h);
+    }
+
+    @FXML
+    private void guardarArchivo(ActionEvent event) {
+
+        fc.setTitle("Guardar XML");
+        fc.setInitialFileName("archivo");
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
+
+        File f = fc.showSaveDialog(null);
+        fc.setInitialDirectory(f.getParentFile());
+
+        boolean t = ManejoArchivo.crearArchivoXML(lasFiguras, f);
+
+        if (t) {
+            JOptionPane.showMessageDialog(null, "Se creo el archivo");
+        } else {
+            JOptionPane.showMessageDialog(null, "No Se creo el archivo");
+        }
+        System.out.println("t = " + t);
+
+    }
+
+    @FXML
+    private void leerArchivo(ActionEvent event) {
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
+        File f = fc.showOpenDialog(null);
+
+        if (fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML Files", "*.xml"))) {
+            lasFiguras = ManejoArchivo.leerXML(f);
+            int s = lasFiguras.size();
+            System.out.println("s = " + s);
+
+            for (int i = 0; i < s; i++) {
+                FiguraGeometrica F = lasFiguras.get(i);
+                System.out.println("Figuras = " + lasFiguras);
+                LinkedList<Punto2D> losPuntos = F.getLosPuntos();
+                ColorValue colorBorde = F.getStrokeValue();
+                ColorValue colorRelleno = F.getFillValue();
+                System.out.println("losPuntos = " + losPuntos);
+
+                pX = new double[losPuntos.size()];
+                pY = new double[losPuntos.size()];
+
+                for (int j = 0; j < losPuntos.size(); j++) {
+                    Punto2D p = losPuntos.get(j);
+                    double xp = p.getX();
+                    double yp = p.getY();
+                    pX[j] = xp;
+                    pY[j] = yp;
+
+                }
+
+                g.setLineWidth(F.getLineW());
+                g.setFill(new Color(colorRelleno.getR(), colorRelleno.getG(), colorRelleno.getB(), colorRelleno.getA()));
+                g.setStroke(new Color(colorBorde.getR(), colorBorde.getG(), colorBorde.getB(), colorBorde.getA()));
+                g.strokePolygon(pX, pY, losPuntos.size());
+                g.fillPolygon(pX, pY, losPuntos.size());
+
+            }
+        }
     }
 
     @FXML
@@ -265,6 +435,12 @@ public class FXMLDocumentController implements Initializable {
         g.strokeRect(0, 0, w, h);
 
         colorRelleno.setDisable(true);
+
+        contador = 0;
+        strokeValue = new ColorValue();
+        fillValue = new ColorValue();
+        lasFiguras = new LinkedList<>();
+        fc = new FileChooser();
 
     }
 

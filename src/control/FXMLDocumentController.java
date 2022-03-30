@@ -47,6 +47,10 @@ public class FXMLDocumentController implements Initializable {
 
     //variables para el metodo estrella5
     double[] x, y;
+    
+    //Variables para curva
+    LinkedList<Punto2D> pCurva = new LinkedList<>();
+    
     GraphicsContext g;
 
     @FXML
@@ -89,6 +93,11 @@ public class FXMLDocumentController implements Initializable {
         coordenadaY = event.getY();
 //
         Punto2D objp = new Punto2D(coordenadaX, coordenadaY);
+        pCurva.add(objp);
+        if(pCurva.size() > 4){
+            pCurva.removeFirst();
+        }
+        
 
         System.out.println("Punto " + objp.toString());
     }
@@ -216,7 +225,32 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void curva(ActionEvent event) {
-        g.bezierCurveTo(cX, cX, cX, cX, cX, cX);
+        double x1,y1,x2,y2,x3,y3,x4,y4;
+        
+        if(pCurva.size() < 4){
+            JOptionPane.showMessageDialog(null,"Recuerda marcar 4 puntos antes de generar la curva" );
+        }else{
+            x1 = pCurva.get(0).getX();
+            y1 = pCurva.get(0).getY();
+
+            x2 = pCurva.get(1).getX();
+            y2 = pCurva.get(1).getY();
+
+            x3 = pCurva.get(2).getX();
+            y3 = pCurva.get(2).getY();
+
+            x4 = pCurva.get(3).getX();
+            y4 = pCurva.get(3).getY();
+
+            g.moveTo(x1, y1);
+            g.setStroke(colorBorde.getValue());
+            g.setLineWidth(sliderBorde.getValue());
+            g.bezierCurveTo(x2, y2, x3, y3, x4, y4);
+            g.stroke();
+        
+        }
+        
+        
 
     }
 
@@ -484,6 +518,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void limpiarLienzo(ActionEvent event) {
+        
+ 
         g.clearRect(0, 0, lienzo.getWidth(), lienzo.getHeight());
 
         g = lienzo.getGraphicsContext2D();

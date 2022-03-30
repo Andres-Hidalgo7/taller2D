@@ -21,9 +21,22 @@ import org.jdom2.output.XMLOutputter;
 
 /**
  *
- * @author juank
+ *Esta clase contiene los metodos para crear y leer los archivos XML
+ * @author Juan Camilo Hidalgo Betancourth 2205622
+ * @author Andrés Felipe Hidalgo Betancourth 2205621
+ * @author Alejandro Gomez Llanos 2201157
+ * @author Diego Fernando Rangel Lopez
+ * date 28 Marzo 2022
  */
 public class ManejoArchivo {
+    /**
+     * CrearArchivoXML.
+     *
+     * @param lasFiguras Este método crea un archivo XML
+     * con la información de las figuras mostradas en el canvas.
+     * @return Retorna un boolean t como verdadero
+     * 
+     */
     public static boolean crearArchivoXML(LinkedList<FiguraGeometrica> lasFiguras, File F) {
 
         boolean t = false;
@@ -69,7 +82,7 @@ public class ManejoArchivo {
             xmlOutput.setFormat(Format.getPrettyFormat());
             xmlOutput.output(doc, new FileWriter(F));
             t = true;
-            System.out.println("Archivo Guardado!");
+            System.out.println("Archivo Guardado");
 
         } catch (IOException ex) {
             Logger.getLogger(ManejoArchivo.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,8 +91,13 @@ public class ManejoArchivo {
         return t;
 
     }
-    
-    public static LinkedList<FiguraGeometrica> leerXML(File f) {
+    /**
+     * LeerXML.
+     *
+     * @param File f este método lee el archivo XML que contiene la información guardada antes del canvas
+     * @return lasFiguras es una lista con las figuras guardadas
+     */
+    public static LinkedList<FiguraGeometrica> leerArchivoXML(File f) {
 
         LinkedList<FiguraGeometrica> lasFiguras = new LinkedList<>();
         LinkedList<Punto2D> lPoints;

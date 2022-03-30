@@ -13,7 +13,12 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author andre
+ *Esta clase ejecuta todo el programa
+ * @author Juan Camilo Hidalgo Betancourth 2205622
+ * @author Andrés Felipe Hidalgo Betancourth 2205621
+ * @author Alejandro Gomez Llanos 2201157
+ * @author Diego Fernando Rangel Lopez
+ * date 28 Marzo 2022
  */
 public class Taller2D extends Application {
     

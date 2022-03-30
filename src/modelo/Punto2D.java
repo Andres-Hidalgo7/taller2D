@@ -7,7 +7,12 @@ package modelo;
 
 /**
  *
- * @author andre
+ *Esta clase contiene atributos para guardar un punto2D
+ * @author Juan Camilo Hidalgo Betancourth 2205622
+ * @author Andrés Felipe Hidalgo Betancourth 2205621
+ * @author Alejandro Gomez Llanos 2201157
+ * @author Diego Fernando Rangel Lopez
+ * date 28 Marzo 2022
  */
 public class Punto2D {
     

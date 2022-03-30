@@ -10,7 +10,12 @@ import javafx.scene.paint.Color;
 
 /**
  *
- * @author juank
+ *Esta clase se tienen todos los atributos de una figura geométrica
+ * @author Juan Camilo Hidalgo Betancourth 2205622
+ * @author Andrés Felipe Hidalgo Betancourth 2205621
+ * @author Alejandro Gomez Llanos 2201157
+ * @author Diego Fernando Rangel Lopez
+ * date 28 Marzo 2022
  */
 public class FiguraGeometrica {
     
@@ -167,8 +172,8 @@ public class FiguraGeometrica {
     /**
      * toHexString.
      *
-     * @param color. // Este método se encarga de convertir un objeto tipo color en un valor
-     * hexadecimal con base a los parametos rojo, verde, azul y la opacidad.
+     * @param color. Este método convierte un objeto tipo color en un valor
+     * hexadecimal.
      * @return Un valor hexadecimal.
      */
     public static String toHexString(Color color) {

@@ -36,7 +36,12 @@ import modelo.Punto2D;
 
 /**
  *
- * @author andres
+ *En esta clase va toda la lógica del programa al ejecutarse
+ * @author Juan Camilo Hidalgo Betancourth 2205622
+ * @author Andrés Felipe Hidalgo Betancourth 2205621
+ * @author Alejandro Gomez Llanos 2201157
+ * @author Diego Fernando Rangel Lopez
+ * date 28 Marzo 2022
  */
 public class FXMLDocumentController implements Initializable {
 
@@ -54,25 +59,27 @@ public class FXMLDocumentController implements Initializable {
     GraphicsContext g;
 
     @FXML
-    ColorPicker colorRelleno, colorBorde;
+    private ColorPicker colorRelleno, colorBorde;
 
     @FXML
-    Label lRadio;
+    private Label lRadio;
 
     @FXML
-    Slider sliderBorde, sliderRadio;
+    private Slider sliderBorde, sliderRadio;
 
     @FXML
     private Canvas lienzo;
     @FXML
     private RadioButton relleno, borde;
-
+   //Variables para el guardado del las figuras
     DecimalFormat df;
     FileChooser fc;
     LinkedList<FiguraGeometrica> lasFiguras;
     LinkedList<Punto2D> losPuntos;
+    
     String colorStroke = "Sin borde";
     String colorFill = "Sin relleno";
+    //Variables para guardar el color
     double red = 0;
     double blue = 0;
     double green = 0;
@@ -81,13 +88,19 @@ public class FXMLDocumentController implements Initializable {
 
     ColorValue fillValue;
     ColorValue strokeValue;
-
+//contador para guardar varias veces una misma figura
     int contador = 0;
-
+//Array para almcenar los puntos leidos
     double pX[];
     double pY[];
 
     @FXML
+    /**
+     * ObtenerCoordenadas
+     *
+     * @param Event //este método obtiene las coordenadas del mouse cuando da click en el area de trabajo
+     * 
+     */
     private void obtenerCoordenadas(MouseEvent event) {
         coordenadaX = event.getX();
         coordenadaY = event.getY();
@@ -101,7 +114,15 @@ public class FXMLDocumentController implements Initializable {
 
         System.out.println("Punto " + objp.toString());
     }
-
+    /**
+     * ngon
+     *
+     * @param x  
+     * @param y
+     * @param r
+     * @param n //Este metodo crea un polígono de lados n, y es llamado por lo botones que hacen poligonos
+     * y también guarda las figuras
+     */
     public void ngon(double x, double y, double r, int n) {
 
         xx = new double[n];
@@ -122,6 +143,7 @@ public class FXMLDocumentController implements Initializable {
             o += a;
 
         }
+        //Dibuja dependiendo de si estan activados el borde y el relleno
         lineW = sliderBorde.getValue();
         if (!relleno.isSelected() && borde.isSelected()) {
 
@@ -186,6 +208,13 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+    /**
+     * activarBoton
+     *
+     * @param Event //Este metodo activa y desactiva el colorpicker del relleno y de los bordes
+     * dependiendo si estan activados o no
+     * 
+     */
     private void activarBoton(ActionEvent event) {
         if (relleno.isSelected()) {
             colorRelleno.setDisable(false);
@@ -204,26 +233,55 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+    /**
+     * hexagono
+     *
+     * @param Event //Genera un hexagono llamando al metodo ngon
+     * 
+     */
     private void hexagono(ActionEvent event) {
         ngon(coordenadaX, coordenadaY, sliderRadio.getValue(), 6);
     }
-
+ /**
+     * heptagono
+     *
+     * @param Event //Genera un heptagono llamando al metodo ngon
+     * 
+     */
     @FXML
     private void heptagono(ActionEvent event) {
         ngon(coordenadaX, coordenadaY, sliderRadio.getValue(), 7);
     }
 
     @FXML
+     /**
+     * octagono
+     *
+     * @param Event //Genera un octagono llamando al metodo ngon
+     * 
+     */
     private void octagono(ActionEvent event) {
         ngon(coordenadaX, coordenadaY, sliderRadio.getValue(), 8);
     }
 
     @FXML
+     /**
+     * decagono
+     *
+     * @param Event //Genera un decagono llamando al metodo ngon
+     * 
+     */
     private void decagono(ActionEvent event) {
         ngon(coordenadaX, coordenadaY, sliderRadio.getValue(), 10);
     }
 
     @FXML
+     /**
+     * curva
+     *
+     * @param Event //Genera una curva usando la función de BezierCurvTo
+     * 
+     */
     private void curva(ActionEvent event) {
         double x1,y1,x2,y2,x3,y3,x4,y4;
         
@@ -255,6 +313,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+     /**
+     * pacman
+     *
+     * @param Event //Hace un pacman usandoo curvas y lineas
+     * 
+     */
     private void pacman(ActionEvent event) {
         //aqui sabremos el tamaño que tendremos
         x = new double[3];
@@ -302,6 +366,13 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+     /**
+     * estrella5
+     *
+     * @param Event //crea una estrella calculando sus puntos uno por uno
+     * y también guarda la figura
+     * 
+     */
     private void estrella5(ActionEvent event) {
         x = new double[10];
         y = new double[10];
@@ -410,6 +481,13 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+     /**
+     * estrella6
+     *
+     * @param Event //crea una estrella calculando sus puntos uno por uno
+     * y también guarda la figura
+     * 
+     */
     private void estrella6(ActionEvent event) {
         double rad = sliderRadio.getValue();
 
@@ -517,6 +595,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+     /**
+     *limpiarLienzo
+     *
+     * @param Event //Deja en blanco todo el area de trabajo
+     * 
+     */
     private void limpiarLienzo(ActionEvent event) {
         
  
@@ -531,6 +615,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+     /**
+     * guardarArchivo
+     *
+     * @param Event //Guarda el archivo XML con las figuras en una lista
+     * 
+     */
     private void guardarArchivo(ActionEvent event) {
 
         fc.setTitle("Guardar XML");
@@ -552,13 +642,20 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+    /**
+     * leerArchivo
+     *
+     * @param Event //Lee el archivo guardado anteriormente y lo dibuja en el
+     * area de trabajo
+     * 
+     */
     private void leerArchivo(ActionEvent event) {
 
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
         File f = fc.showOpenDialog(null);
 
         if (fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("XML Files", "*.xml"))) {
-            lasFiguras = ManejoArchivo.leerXML(f);
+            lasFiguras = ManejoArchivo.leerArchivoXML(f);
             int s = lasFiguras.size();
             System.out.println("s = " + s);
 
@@ -593,6 +690,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+    /**
+     * guardarIMG
+     *
+     * @param Event //Guarda un snapshot del área de trabajo en png o jpg 
+     * 
+     */
     private void guardarIMG(ActionEvent event) throws IOException {
 
         Image snapshot = lienzo.snapshot(null, null);
@@ -601,11 +704,10 @@ public class FXMLDocumentController implements Initializable {
         FileChooser fc = new FileChooser();
         fc.setTitle("Guardar captura del canvas");
 
-        //Filtro para los archivos
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", ".jpg"),
                 new FileChooser.ExtensionFilter("PNG", ".png"));
-        //Guardar la imagen
+        //guarda la captura
         File canvasCapture1 = fc.showSaveDialog(null);
         if (canvasCapture1 != null) {
             WritableImage wi = new WritableImage((int) lienzo.getWidth(), (int) lienzo.getHeight());
@@ -618,6 +720,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @Override
+    /**
+     * Initialize
+     *
+     * @param Event //Este método se ejecuta cuando corre el programa
+     * 
+     */
     public void initialize(URL url, ResourceBundle rb) {
         g = lienzo.getGraphicsContext2D();
         double w = lienzo.getWidth();

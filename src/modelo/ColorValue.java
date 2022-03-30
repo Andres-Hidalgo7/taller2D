@@ -7,7 +7,12 @@ package modelo;
 
 /**
  *
- * @author juank
+ *Esta clase contiene los atributos del color rgb
+ * @author Juan Camilo Hidalgo Betancourth 2205622
+ * @author Andrés Felipe Hidalgo Betancourth 2205621
+ * @author Alejandro Gomez Llanos 2201157
+ * @author Diego Fernando Rangel Lopez
+ * date 28 Marzo 2022
  */
 public class ColorValue {
 
